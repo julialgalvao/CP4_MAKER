@@ -1,0 +1,14 @@
+.venv/
+.venv-mac/
+venv/
+env/
+__pycache__/
+*.pyc
+.env
+.idea/
+.DS_Store
+prints/*.png
+
+# O modelo treinado (classificadoreigen.yml) e as fotos em fotos/ são
+# versionados de propósito: o professor pediu para deixar o modelo
+# pré-treinado e as pessoas já cadastradas para facilitar a demonstração.

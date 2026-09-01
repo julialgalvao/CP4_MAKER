@@ -1,0 +1,8 @@
+SpeechRecognition>=3.10
+PyAudio>=0.2.14
+pyttsx3>=2.90
+opencv-contrib-python>=4.10,<5.0
+numpy>=1.26
+requests>=2.32
+groq>=0.30
+PyAutoGUI>=0.9.54
