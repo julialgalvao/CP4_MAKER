@@ -811,6 +811,61 @@ class Jack:
                 return re.sub(padrao, "", texto, count=1, flags=re.IGNORECASE).strip(" ,.!?")
         return texto.strip(" ,.!?")
 
+    # Gatilhos que indicam que a pessoa quer falar de propósito com a IA.
+    # São checados no começo da frase (ex.: "pergunte para a IA ...") ou como
+    # a frase inteira (ex.: só "pergunte para a IA").
+    GATILHOS_IA = (
+        "perguntar para a ia",
+        "perguntar para ia",
+        "perguntar pra ia",
+        "pergunte para a ia",
+        "pergunte para ia",
+        "pergunte pra ia",
+        "pergunta para a ia",
+        "pergunta pra ia",
+        "perguntar a ia",
+        "pergunte a ia",
+        "pergunta a ia",
+        "perguntar ia",
+        "pergunte ia",
+        "pergunta ia",
+        "responda com a ia",
+        "responder com a ia",
+        "usando a ia",
+        "usando ia",
+        "com a ia",
+        "com ia",
+        "para a ia",
+        "pra ia",
+    )
+
+    @classmethod
+    def _eh_pedido_para_ia(cls, comando):
+        """Diz se o comando é um pedido explícito para a IA generativa."""
+        for gatilho in cls.GATILHOS_IA:
+            # No começo da frase ("pergunte para a IA o que é ...") ou a frase
+            # inteira sendo só o gatilho ("pergunte para a IA").
+            if comando.startswith(gatilho) or comando == gatilho:
+                return True
+        # Também aceita quando a frase começa apenas com "IA ..." (ex.: "IA o
+        # que é fotossíntese"). Usamos \b para não pegar palavras como "iam".
+        return bool(re.match(r"^ia\b", comando))
+
+    @classmethod
+    def _extrair_pergunta_ia(cls, comando_original):
+        """Remove o gatilho da frente e devolve só a pergunta para a IA."""
+        texto = comando_original.strip()
+        # Ordena do gatilho mais longo para o mais curto, para remover sempre a
+        # forma mais completa (ex.: "perguntar para a ia" antes de "para a ia").
+        for gatilho in sorted(cls.GATILHOS_IA, key=len, reverse=True):
+            padrao = rf"^{re.escape(gatilho)}\b"
+            if re.match(padrao, texto, flags=re.IGNORECASE):
+                return re.sub(padrao, "", texto, count=1, flags=re.IGNORECASE).strip(" ,.:!?")
+        # Caso tenha começado só com "IA ...".
+        if re.match(r"^ia\b", texto, flags=re.IGNORECASE):
+            return re.sub(r"^ia\b", "", texto, count=1, flags=re.IGNORECASE).strip(" ,.:!?")
+        return texto
+
     def executar_comando(self, comando):
         comando_original = comando.strip()
         comando = comando_original.lower().strip()
@@ -869,11 +924,11 @@ class Jack:
             self.cadastrar_rosto()
         elif "reconhecer face" in comando or "quem sou eu" in comando or "reconhecer rosto" in comando:
             self.reconhecer_face()
-        elif comando.startswith("perguntar ia"):
-            pergunta = re.sub(r"^perguntar\s+ia", "", comando_original, flags=re.IGNORECASE).strip()
-            self.perguntar_ia(pergunta)
-        elif comando.startswith("perguntar para ia") or comando.startswith("perguntar para a ia"):
-            pergunta = re.sub(r"^perguntar\s+para\s+(a\s+)?ia", "", comando_original, flags=re.IGNORECASE).strip()
+        elif self._eh_pedido_para_ia(comando):
+            # Formas explícitas de chamar a IA generativa, ex.:
+            # "perguntar IA ...", "pergunte para a IA ...", "pergunta pra IA ...",
+            # "com a IA ...", "usando a IA ...", "IA ...".
+            pergunta = self._extrair_pergunta_ia(comando_original)
             self.perguntar_ia(pergunta)
         elif "google" in comando or "pesquisar" in comando or "pesquise" in comando:
             # Extrai o termo depois de "google" (ou de "pesquisar/pesquise").
