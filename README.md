@@ -1,10 +1,10 @@
-# 🤖 Projeto Jack — Assistente Virtual (Checkpoint 4)
+# Projeto Jack — Assistente Virtual (Checkpoint 4)
 
 Assistente virtual em Python controlada por **voz**. A assistente se chama **Jack** e só executa comandos depois de ouvir seu nome (wake word). Ela reconhece fala, responde por voz, gerencia uma agenda, faz cálculos, reconhece rostos pela webcam (com **filtros visuais divertidos**), conversa com uma **IA generativa** e ainda tem vários comandos extras.
 
 > Projeto desenvolvido para o Checkpoint 4 — 2º semestre.
 
-## 👥 Integrantes do grupo
+## Integrantes do grupo
 
 | Nome | RM |
 | --- | --- |
@@ -14,36 +14,11 @@ Assistente virtual em Python controlada por **voz**. A assistente se chama **Jac
 
 ---
 
-## ✅ Checklist de requisitos (itens 1 a 10 do enunciado)
-
-| # | Requisito do enunciado | Status | Onde está no código |
-| --- | --- | :---: | --- |
-| 1 | Wake word: só age depois de ouvir o nome **"Jack"**; sem o nome, apenas imprime o texto | ✅ | `iniciar()` + `contem_nome_assistente()` em `main.py` |
-| 2 | Cadastrar evento e salvar em `agenda.txt` | ✅ | `cadastrar_evento()` |
-| 3 | Ler agenda e falar os eventos | ✅ | `ler_agenda()` |
-| 4 | Informar a hora atual | ✅ | `informar_hora()` |
-| 5 | Informar a data atual | ✅ | `informar_data()` |
-| 6 | Calcular (+, −, ×, ÷) | ✅ | `calcular()` |
-| 7 | Reconhecer face / "Quem sou eu?" pela webcam | ✅ | `reconhecer_face()` (EigenFaces) |
-| 8 | Limpar agenda **sem** apagar o arquivo | ✅ | `limpar_agenda()` |
-| 9 | Integração com IA generativa (Groq na nuvem ou Ollama local) | ✅ | `perguntar_ia()` |
-| 10 | Comandos extras (mínimo 2 — **fizemos vários**) | ✅ | ver seção abaixo |
-
-**Critérios de avaliação atendidos:**
-
-- ✅ **[3 pts]** Itens 1 a 9 completos, código dividido em funções/métodos e comentado.
-- ✅ **[1 pt]** Código orientado a objetos com pelo menos uma classe (`class Jack`).
-- ✅ **[3 pts]** Muito mais que 2 comandos extras (item 10): cotações em tempo real, filtros de imagem, cadastro de novos rostos e apresentação.
-- ✅ **[2 pts]** Repositório público com documentação, dependências e instruções (este README).
-- ✅ **[1 pt]** Base pronta para uma apresentação clara e objetiva.
-
----
-
-## ✨ Funcionalidades
+## Funcionalidades
 
 ### Comandos obrigatórios
 
-- **Wake word "Jack"** — nenhuma ação acontece sem o nome ser falado. O reconhecedor aceita variações comuns de transcrição (jaque, check, etc.) para não falhar na apresentação.
+- **Wake word "Jack"** — nenhuma ação acontece sem o nome ser falado. O reconhecedor aceita variações comuns de transcrição (jaque, check, etc.) para não falhar no entendimento.
 - **Agenda** — cadastrar, ler e limpar eventos (`agenda.txt`).
 - **Hora e data atuais**.
 - **Calculadora** por voz (adição, subtração, multiplicação e divisão).
@@ -52,19 +27,19 @@ Assistente virtual em Python controlada por **voz**. A assistente se chama **Jac
 
 ### Comandos extras (item 10)
 
-1. 🔎 **Pesquisar no Google**
-2. ▶️ **Abrir vídeo no YouTube**
-3. 🖼️ **Tirar print da tela**
-4. 🎓 **Abrir o portal da FIAP**
-5. 💵 **Cotação do dólar** em tempo real (AwesomeAPI, gratuita)
-6. ₿ **Cotação do bitcoin** em tempo real
-7. 🎭 **Filtros visuais divertidos** na webcam (troca por tecla ou por voz)
-8. 🧑‍💻 **Cadastrar novos rostos por voz** (captura fotos e treina o modelo na hora)
-9. 🙋 **Apresentação automática** — o Jack se apresenta ao iniciar
+1. **Pesquisar no Google**
+2. **Abrir vídeo no YouTube**
+3. **Tirar print da tela**
+4. **Abrir o portal do aluno da FIAP**
+5. **Cotação do dólar** em tempo real (AwesomeAPI, gratuita)
+6. **Cotação do bitcoin** em tempo real
+7. **Filtros visuais divertidos** na webcam (troca por tecla ou por voz)
+8. **Cadastrar novos rostos por voz** (captura fotos e treina o modelo na hora)
+9. **Apresentação automática** — o Jack se apresenta ao iniciar
 
 > A fala usa **voz feminina em português** (Luciana, via `say` no macOS; `pyttsx3` no Windows).
 
-### 🎭 Filtros visuais da webcam
+### Filtros visuais da webcam
 
 Durante o "Quem sou eu?", dá para trocar o visual da câmera ao vivo. O reconhecimento facial continua funcionando por baixo de qualquer filtro.
 
@@ -81,7 +56,7 @@ Filtros disponíveis: `Normal`, `HUD` (mira animada), `Óculos` escuros, `Cartoo
 
 ---
 
-## 📁 Estrutura do projeto
+## Estrutura do projeto
 
 ```text
 projeto_friday_cp4/
@@ -103,7 +78,7 @@ projeto_friday_cp4/
 
 ---
 
-## 🛠️ Instalação
+## Instalação
 
 Recomendado: **Python 3.11 ou 3.12**.
 
@@ -141,7 +116,7 @@ pip install PyAudio
 
 ---
 
-## 🧠 Configurar a IA generativa
+## Configurar a IA generativa
 
 Há duas opções. Basta uma delas funcionar.
 
@@ -181,7 +156,7 @@ Com o Ollama rodando, execute `python main.py`. Se a `GROQ_API_KEY` não estiver
 
 ---
 
-## 🍎 Permissões no macOS
+## Permissões no macOS
 
 Na primeira execução, o macOS pede permissões. Autorize o app do Terminal em **Ajustes do Sistema → Privacidade e Segurança**:
 
@@ -191,7 +166,7 @@ Na primeira execução, o macOS pede permissões. Autorize o app do Terminal em 
 
 ---
 
-## 📷 Reconhecimento facial
+## Reconhecimento facial
 
 O reconhecimento usa `cv2.face.EigenFaceRecognizer_create()` (pacote **opencv-contrib-python**, já no `requirements.txt`). O detector de rostos (`haarcascade_frontalface_default.xml`) e um modelo pré-treinado (`classificadoreigen.yml`) já vêm no projeto.
 
@@ -212,7 +187,7 @@ python treinar_faces.py    # treina e gera o classificadoreigen.yml
 
 ---
 
-## ▶️ Como executar
+## Como executar
 
 ```bash
 python main.py
@@ -224,12 +199,12 @@ Ao iniciar, o Jack mostra um banner com os integrantes e **se apresenta sozinho*
 
 ---
 
-## 🎙️ Comandos (fale sempre começando com "Jack")
+## Comandos (fale sempre começando com "Jack")
 
 ```text
 Jack que horas são
 Jack que dia é hoje
-Jack quanto é 10 mais 5
+Jack quanto é (ex: 10 x 20)
 Jack cadastrar evento na agenda
 Jack ler agenda
 Jack limpar agenda
@@ -237,8 +212,8 @@ Jack quem sou eu
 Jack cadastrar rosto
 Jack explique o que é inteligência artificial
 Jack quem é você
-Jack pesquisar no Google inteligência artificial
-Jack abrir YouTube tutorial de Python
+Jack pesquisar no Google (ex: O que é IA?)
+Jack abrir YouTube (ex: gatos miando)
 Jack tirar um print da tela
 Jack abrir portal da faculdade
 Jack qual o valor do dólar hoje
@@ -246,18 +221,18 @@ Jack quanto vale um bitcoin
 Jack sair
 ```
 
-- Sem o nome **"Jack"**, o comando é ignorado (regra do enunciado).
+- Sem o nome **"Jack"**, o comando é ignorado.
 - A calculadora aceita **mais, menos, vezes, dividido por**.
 - Se não entender, o Jack pede para repetir.
 
-## 📷 Na câmera ("Jack quem sou eu")
+## Na câmera ("Jack quem sou eu")
 
 - **F** próximo filtro · **N** anterior · **0** normal · **ESPAÇO** trocar filtro por voz · **Q** fechar
 - **"Jack cadastrar rosto"**: ele pergunta o nome, abre a câmera, você aperta **ESPAÇO** para tirar as fotos e ele treina sozinho.
 
 ---
 
-## 📦 Dependências
+## Dependências
 
 Veja `requirements.txt`:
 
@@ -270,15 +245,3 @@ Veja `requirements.txt`:
 - `groq` — IA generativa na nuvem
 - `PyAutoGUI` — print da tela (no macOS o Jack usa o `screencapture` nativo)
 
----
-
-## 🚀 Subir no GitHub
-
-```bash
-git init
-git add .
-git commit -m "Checkpoint 4 - Assistente Jack"
-git branch -M main
-git remote add origin URL_DO_SEU_REPOSITORIO
-git push -u origin main
-```
